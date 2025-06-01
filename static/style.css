@@ -1,0 +1,171 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('song.gif') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: column;
+}
+h2{
+    font-family: comic sans ms;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #e2e2e2;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 25px;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+@media (max-width: 510px) {
+    .container {
+        width: auto; /* Diminui a largura */
+    }
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s ease;
+}
+
+button img {
+    width: 80px;
+    height: auto;
+}
+
+button:hover {
+    transform: scale(1.4);
+}
+
+.error {
+    color: red;
+    margin-bottom: 15px;
+}
+
+/* Rodapé fixo ao fundo da tela */
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 8px 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    color: #444;
+    text-align: center;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.linkedin-icon {
+    position: fixed;
+    bottom: 57px;
+    right: 33px;
+    z-index: 999;
+}
+.linkedin-icon img {
+    width: 100px;
+    height: auto;
+    transition: transform 0.2s ease;
+}
+.linkedin-icon img:hover {
+    transform: scale(1.8);
+}
+
+/* propaganda */
+.container, .propaganda {
+    margin: 30px auto;
+}
+
+/* Propaganda permanece igual, só reforçar que slides ativos ficam visíveis */
+.carousel-slide {
+    display: none;
+    width: 100%;
+}
+.carousel-slide.active {
+    display: block;
+}
+.carousel-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+.propaganda {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+    margin: 0;
+}
+@media (max-width: 1310px) {
+    .propaganda {
+        width: 240px; /* Diminui a largura */
+        top: 70px; /* Ajusta a posição */
+        right: 15px; /* Ajusta a margem */
+    }
+}
+@media (max-width: 850px) {
+    .propaganda {
+        width: 180px; /* Diminui a largura */
+        top: 120px; /* Ajusta a posição */
+        right: 15px; /* Ajusta a margem */
+    }
+}
+@media (max-width: 500px) {
+    .propaganda {
+        width: 130px; /* Diminui a largura */
+        top: 150px; /* Ajusta a posição */
+        right: 15px; /* Ajusta a margem */
+    }
+}
+@media (max-width: 388px) {
+    .propaganda {
+        width: 0; /* Diminui a largura */
+        top: 0; /* Ajusta a posição */
+        right: 0; /* Ajusta a margem */
+    }
+}

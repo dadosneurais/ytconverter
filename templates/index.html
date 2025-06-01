@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Downloader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- SGksIGZlbGxhISBJJ20gc2hvdXRpbmcgaGVyZSwgYnV0IGZldyBjYW4gaGVhciBtZQo= -->
+    
+    <h2>Download your YouTube audio or video — no popups, no ads, no logins, no bullshit. 🙈🙉🙊</h2>
+
+    <!-- Anúncio -->
+    <div class="propaganda">
+        <div class="carousel-slide">
+            <img src="{{ url_for('static', filename='ft1.gif') }}" alt="Imagem 1">
+        </div>
+        <div class="carousel-slide">
+            <a href="https://www.instagram.com/dragontattoo1999?igsh=MTIwcW92eGVqbnVmcQ==" target="_blank">
+                <img src="{{ url_for('static', filename='ft2.jpg') }}" alt="Imagem 2">
+            </a>
+        </div>
+    </div>
+    <!-- Fim do Anúncio -->
+    
+    <div class="container">
+        <h1>YouTube Downloader</h1>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        <form method="POST">
+            <input type="text" name="url" placeholder="Cole a URL do vídeo" required>
+            <div class="buttons">
+                <button type="submit" name="format" value="mp3">
+                    <img src="{{ url_for('static', filename='mp3.ico') }}" alt="Download MP3">
+                </button>
+                <button type="submit" name="format" value="mp4">
+                    <img src="{{ url_for('static', filename='mp4.ico') }}" alt="Download MP4">
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- linkedin -->
+    <div class="linkedin-icon">
+        <a href="https://www.linkedin.com/in/petersonmoreno/" target="_blank">
+            <img src="{{ url_for('static', filename='linkedin.gif') }}" alt="LinkedIn">
+        </a>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-text">
+            © 2025 Peterson. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
