@@ -69,12 +69,14 @@ def index():
             ydl_opts = {
                 'format': 'bestaudio/best',
                 'outtmpl': outtmpl,
+                'cookiefile': 'cookies.txt',
             }
         else:  # mp4
             outtmpl = os.path.join(DOWNLOAD_DIR, '%(title)s.mp4')
             ydl_opts = {
                 'merge_output_format': 'mp4',
                 'outtmpl': outtmpl,
+                'cookiefile': 'cookies.txt',
             }
 
         with YoutubeDL(ydl_opts) as ydl:
