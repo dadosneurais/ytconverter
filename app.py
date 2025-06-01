@@ -8,6 +8,9 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
+# yt cookies
+cookie_path = os.path.join(os.path.abspath(''), 'cookies.txt')
+
 DOWNLOAD_DIR = os.path.abspath('')
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 
@@ -69,14 +72,14 @@ def index():
             ydl_opts = {
                 'format': 'bestaudio/best',
                 'outtmpl': outtmpl,
-                'cookiefile': 'cookies.txt',
+                'cookiefile': cookie_path,
             }
         else:  # mp4
             outtmpl = os.path.join(DOWNLOAD_DIR, '%(title)s.mp4')
             ydl_opts = {
                 'merge_output_format': 'mp4',
                 'outtmpl': outtmpl,
-                'cookiefile': 'cookies.txt',
+                'cookiefile': cookie_path,
             }
 
         with YoutubeDL(ydl_opts) as ydl:
