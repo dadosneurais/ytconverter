@@ -31,8 +31,16 @@
         {% if error %}
             <p class="error">{{ error }}</p>
         {% endif %}
-        <form method="POST">
+    
+        {% if cookie_uploaded %}
+            <p class="success">✅ Cookie enviado com sucesso! Usaremos ele neste download.</p>
+        {% endif %}
+    
+        <form method="POST" enctype="multipart/form-data">
             <input type="text" name="url" placeholder="Cole a URL do vídeo" required>
+            <input type="file" name="cookie_file" accept=".txt">
+                <small> Insert your cookie.txt</small>
+            <br><br>
             <div class="buttons">
                 <button type="submit" name="format" value="mp3">
                     <img src="{{ url_for('static', filename='mp3.ico') }}" alt="Download MP3">
