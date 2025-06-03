@@ -183,7 +183,7 @@ footer {
     margin-bottom: 10px;
 }
 
-video {
+.video {
     position: fixed;
     top: 150px;
     left: 60px;
@@ -196,31 +196,36 @@ video {
     z-index: 1000;
     margin: 0;
 }
+.video iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 @media (max-width: 1700px) {
-    video {
+    .video {
         top: 150px;
         width: 500px;
         height: 280px;
     }
 }
 @media (max-width: 1580px) {
-    video {
+    .video {
         top: 150px;
         width: 400px;
         height: 225px;
     }
 }
 @media (max-width: 1380px) {
-    video {
+    .video {
         top: 150px;
         width: 300px;
         height: 170px;
     }
 }
 @media (max-width: 1180px) {
-    video {
-        top: 0;
+    .video {
         width: 0;
         height: 0;
+        overflow: hidden;
     }
 }
