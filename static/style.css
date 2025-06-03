@@ -35,7 +35,7 @@ h2{
 }
 @media (max-width: 510px) {
     .container {
-        width: auto; /* Diminui a largura */
+        width: auto;
     }
 }
 
@@ -143,29 +143,36 @@ footer {
 }
 @media (max-width: 1310px) {
     .propaganda {
-        width: 240px; /* Diminui a largura */
-        top: 70px; /* Ajusta a posição */
-        right: 15px; /* Ajusta a margem */
+        width: 240px;
+        top: 70px;
+        right: 15px;
     }
 }
 @media (max-width: 850px) {
     .propaganda {
-        width: 180px; /* Diminui a largura */
-        top: 120px; /* Ajusta a posição */
-        right: 15px; /* Ajusta a margem */
+        width: 180px;
+        top: 120px;
+        right: 15px;
     }
 }
 @media (max-width: 500px) {
     .propaganda {
-        width: 130px; /* Diminui a largura */
-        top: 150px; /* Ajusta a posição */
-        right: 15px; /* Ajusta a margem */
+        width: 130px;
+        top: 150px; 
+        right: 15px;
     }
 }
 @media (max-width: 388px) {
     .propaganda {
-        width: 0; /* Diminui a largura */
-        top: 0; /* Ajusta a posição */
-        right: 0; /* Ajusta a margem */
+        width: 0;
+        top: 0;
+        right: 0;
     }
 }
+
+.success {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
