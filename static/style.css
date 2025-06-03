@@ -143,14 +143,21 @@ footer {
 }
 @media (max-width: 1310px) {
     .propaganda {
-        width: 240px;
+        width: 320px;
         top: 70px;
+        right: 15px;
+    }
+}
+@media (max-width: 1130px) {
+    .propaganda {
+        width: 220px;
+        top: 75px;
         right: 15px;
     }
 }
 @media (max-width: 850px) {
     .propaganda {
-        width: 180px;
+        width: 170px;
         top: 120px;
         right: 15px;
     }
@@ -176,3 +183,44 @@ footer {
     margin-bottom: 10px;
 }
 
+video {
+    position: fixed;
+    top: 150px;
+    left: 60px;
+    width: 600px;
+    height: 340px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 1000;
+    margin: 0;
+}
+@media (max-width: 1700px) {
+    video {
+        top: 150px;
+        width: 500px;
+        height: 280px;
+    }
+}
+@media (max-width: 1580px) {
+    video {
+        top: 150px;
+        width: 400px;
+        height: 225px;
+    }
+}
+@media (max-width: 1380px) {
+    video {
+        top: 150px;
+        width: 300px;
+        height: 170px;
+    }
+}
+@media (max-width: 1180px) {
+    video {
+        top: 0;
+        width: 0;
+        height: 0;
+    }
+}
